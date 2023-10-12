@@ -1,0 +1,6 @@
+Logged in as {{username}}
+<div id="calculate">
+    <input #expression type="text" name="expression" placeholder="Expression" />
+    <button type="button" (click)="calculate(expression.value)" [disabled]="loading">Calculate</button>
+</div>
+<div id="result" [hidden]="!result">Result is {{result}}</div>

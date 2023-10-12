@@ -1,0 +1,21 @@
+#calculate {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem;
+    max-width: 1200px;
+    margin: 1rem auto;
+    gap: 3rem;
+    background-color: #00000025;
+}
+
+#calculate * {
+    text-align: center;
+    font-size: large;
+}
+
+#result {
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+}

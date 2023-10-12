@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'calculate-web-app';
+  username = 'Samton';
+  password = undefined;
+  email = undefined;
+  onOutletLoaded(component: any) {
+    component.username = this.username;
+  }
 }
