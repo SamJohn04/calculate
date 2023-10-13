@@ -16,7 +16,7 @@ public class AuthService {
     private UserRepository userAuthRepo;
 
     public User registerUser(String username, String password) throws UserAuthException {
-        if (username != null && password != null) {
+        if (username != null && password != null && username != "" && password != "") {
             if (userAuthRepo.findUserByUsername(username) != null)
                 throw new UserAuthException("ALREADY_EXIST");
             User user = new User(username, password);
@@ -27,7 +27,7 @@ public class AuthService {
     }
 
     public User loginUser(String username, String password) throws UserAuthException {
-        if (username != null && password != null) {
+        if (username != null && password != null && username != "" && password != "") {
             if (userAuthRepo.findUserByUsername(username) != null) {
                 if (userAuthRepo.findUserByUsernameAndPassword(username, password) != null) {
                     return new User(username, password);
