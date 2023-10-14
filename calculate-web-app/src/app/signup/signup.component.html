@@ -1,0 +1,18 @@
+<div class="form_container">
+    <form [formGroup]="signupForm" (ngSubmit)="signup()" >
+        <h3>SignUp</h3>
+        <div class="form_input">
+            <label for="username_input">Username</label>
+            <input id="username_input" type="text" formControlName="username" placeholder="Enter username">
+        </div>
+        <div class="form_input">
+            <label for="password_input">Password</label>
+            <input id="password_input" type="password" formControlName="password" placeholder="Enter password">
+        </div>
+        <div *ngIf="error">
+            <p class="error">{{error}}</p>
+        </div>
+        <button type="submit">Signup</button>
+        <a [routerLink]="['/login']">Already have an account</a>
+    </form>
+</div>
