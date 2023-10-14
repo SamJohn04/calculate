@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { User } from 'src/typing/user';
 
 @Injectable({
@@ -9,6 +9,8 @@ export class AuthService {
   authenticatedUser: User | null = null;
 
   constructor(private http: HttpClient) {}
+
+  authUpdate:EventEmitter<User | null> = new EventEmitter();
 
   signup(username: string, password: string) {
     return this.http.post('http://localhost:9000/api/v1/auth/register', {username, password}, {responseType: 'text'});
@@ -29,5 +31,6 @@ export class AuthService {
 
   setAuth(user: User) {
     this.authenticatedUser = user;
+    this.authUpdate.emit(user);
   }
 }
