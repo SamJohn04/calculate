@@ -41,12 +41,18 @@ export class SignupComponent {
       },
       (error) => {
         if (error instanceof HttpErrorResponse) {
-          // this.signupForm.setValue({username: '', password: ''});
-          console.error('signup error:', error.error);
-          this.error = error.error;
+          switch (error.status) {
+            case 400:
+              this.error = error.error;
+              break;
+            default:
+              this.error = "An error occured on our end please try again later";
+              break;
+          }
+          console.error('Signup error:', error);
+          this.signupForm.setValue({ username: '', password: '' });
         }
         this.loading = false;
-        // Handle login error (e.g., display an error message)
       }
     );
   }
