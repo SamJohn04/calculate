@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
@@ -36,6 +36,7 @@ export class SignupComponent {
             username: username!,
             password: password!
           });
+          this.onLogin.emit({username, password})
           this.loading = false;
           this.router.navigate(['/calculate']);
       },
@@ -50,4 +51,6 @@ export class SignupComponent {
       }
     );
   }
+
+  @Output() onLogin = new EventEmitter<any>()
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
@@ -36,6 +36,7 @@ export class LoginComponent {
             username: username!,
             password: password!
           });
+          this.onLogin.emit({username, password})
           this.loading = false;
           this.router.navigate(['/calculate']);
       },
@@ -50,4 +51,6 @@ export class LoginComponent {
       }
     );
   }
+
+  @Output() onLogin = new EventEmitter<any>()
 }

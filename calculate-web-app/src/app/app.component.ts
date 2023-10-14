@@ -6,10 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  username = 'Samton';
-  password = undefined;
-  email = undefined;
+  username?: string;
+  password?: string;
   onOutletLoaded(component: any) {
+    component.onLogin?.subscribe((data: {username: string, password: string}) => {
+      console.log('onLogin: ', data);
+      this.username = data.username;
+      this.password = data.password;
+    })
     component.username = this.username;
   }
 }
