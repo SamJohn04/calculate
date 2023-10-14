@@ -21,6 +21,18 @@ public class Expression {
         this.operator = ' ';
     }
 
+    public String getExpression() {
+        return this.expression;
+    }
+
+    public double getFirstOperand() {
+        return this.firstOperand;
+    }
+
+    public double getSecondOperand() {
+        return this.secondOperand;
+    }
+
     public void extractFromExpression() {
         StringTokenizer tokenizer = new StringTokenizer(this.expression, "+-*/%^", true);
 
