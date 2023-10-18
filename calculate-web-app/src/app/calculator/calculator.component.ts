@@ -21,8 +21,7 @@ export class CalculatorComponent {
       }
     })
 
-    const { result, traceLog } = await res.json();
-    console.log("calculator trace: ", traceLog);
+    const { result } = await res.json();
     this.result = result;
     this.loading = false;
 
@@ -38,7 +37,5 @@ export class CalculatorComponent {
         'Content-Type': 'application/json',
       }
     })
-
-    console.log("Store result trace: ", (await storeResult.json()).traceLog);
   }
 }

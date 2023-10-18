@@ -1,6 +1,5 @@
 package com.calculate.storeResults;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import org.apache.tomcat.util.json.JSONParser;
@@ -15,20 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.calculate.storeResults.traceLog.TraceLog;
 import com.calculate.storeResults.traceLog.TraceLogAspect;
-import com.calculate.storeResults.traceLog.TraceLogItem;
 
 @RestController
 public class LogController {
     @Autowired
 	private LogRepository logRepo;
 
-    private final TraceLogAspect traceLogAspect;
-
     private final Expression expression;
 
     @Autowired
     public LogController(TraceLogAspect traceLogAspect, Expression expression) {
-        this.traceLogAspect = traceLogAspect;
         this.expression = expression;
     }
 
@@ -60,26 +55,18 @@ public class LogController {
     @TraceLog
     @CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path="/log")
-	public ResponseEntity<Result> storeResults(@RequestBody String reqBody) {
+	public ResponseEntity<String> storeResults(@RequestBody String reqBody) {
 		try {
             Log log = parseLog(reqBody);
 		    storeResult(log);
 
-            ArrayList<TraceLogItem> traceLog = traceLogAspect.getTraceLog();
-		    for(TraceLogItem traceLogItem: traceLog) {
-			    System.out.println(traceLogItem.getMethod());
-			    for(String arg: traceLogItem.getArgs()) {
-				    System.out.println(arg);
-			    }
-		    }
-
-            return ResponseEntity.ok(new Result("Log Stored Successfully", traceLog));
+            return ResponseEntity.ok("Log Stored Successfully");
         } catch(ParseException e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(new Result("Parsing failed", traceLogAspect.getTraceLog()));
+            return ResponseEntity.badRequest().body("Parsing failed");
         } catch(Exception e) {
             System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(new Result("Error Storing Log", traceLogAspect.getTraceLog()));
+            return ResponseEntity.badRequest().body("Error Storing Log");
         }
 	}
 }

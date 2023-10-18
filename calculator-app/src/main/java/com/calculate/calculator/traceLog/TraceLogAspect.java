@@ -1,55 +1,31 @@
 package com.calculate.calculator.traceLog;
 
-import java.util.ArrayList;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
 public class TraceLogAspect {
 
-    private ArrayList<TraceLogItem> traceLog = new ArrayList<TraceLogItem>();
+    private static final Logger logger = LoggerFactory.getLogger(TraceLogAspect.class);
 
     @Pointcut("@annotation(TraceLog)")
     public void traceLogPointcut() {
     }
 
-    // @Before("execution(* com.calculate.calculator.*.*(..))")
-    // public void beforeMethodExecution(JoinPoint joinPoint) {
-    //     // System.out.println(traceLog);
-    //     Object args[] = joinPoint.getArgs();
-    //     System.out.print("Method called: " + joinPoint.getSignature().getName() + "(");
-    //     for(int i = 0; i < args.length; i++) {
-    //         System.out.print(args[i]);
-    //         if(i != args.length - 1) {
-    //             System.out.print(", ");
-    //         }
-    //     }
-    //     System.out.println(")");
-    // }
-
     @Before("traceLogPointcut()")
     public void beforePointcut(JoinPoint joinPoint) {
         Object args[] = joinPoint.getArgs();
-        String traceLogValues[] = new String[args.length];
-        System.out.print("Method called: " + joinPoint.getSignature().getName() + "(");
+        String methodArguments = "";
         for(int i = 0; i < args.length; i++) {
-            System.out.print(args[i]);
-            if(i != args.length - 1) {
-                System.out.print(", ");
-            }
-            traceLogValues[i ] = args[i].toString();
+            methodArguments += (args[i].getClass().getSimpleName().equals("String") ? "\"" + args[i].toString() + "\"" : args.toString()) + (i < args.length - 1 ? ", " : "");
         }
-        System.out.println(")");
         
-        traceLog.add(new TraceLogItem(joinPoint.getSignature().getName(), traceLogValues));
-    }
-
-    public ArrayList<TraceLogItem> getTraceLog() {
-        return traceLog;
+        logger.info("\n\u001B[42;1m[METHOD]\u001B[0m: {} \033[60G \u001B[42;1m[ARGS]\u001B[0m: \u001B[34;1m{}\u001B[0m", joinPoint.getSignature().getName(), methodArguments);
     }
 }

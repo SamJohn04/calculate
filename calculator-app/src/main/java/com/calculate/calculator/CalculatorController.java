@@ -1,8 +1,5 @@
 package com.calculate.calculator;
 
-import java.util.ArrayList;
-
-import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,17 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.calculate.calculator.traceLog.TraceLog;
 import com.calculate.calculator.traceLog.TraceLogAspect;
-import com.calculate.calculator.traceLog.TraceLogItem;
 
 @RestController
 public class CalculatorController {
-	private final TraceLogAspect traceLogAspect;
 
 	private final Expression expression;
 
 	@Autowired
 	public CalculatorController(TraceLogAspect traceLogAspect, Expression expression) {
-		this.traceLogAspect = traceLogAspect;
 		this.expression = expression;
 	}
 
@@ -35,19 +29,15 @@ public class CalculatorController {
 	@TraceLog
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path="/calculate")
-	public ResponseEntity<Result> calculateExpressionResult(@RequestBody String expression) throws ParseException {
-		this.expression.setExpression(expression);
-		this.expression.extractFromExpression();
-		double result = this.expression.calculate();
-		
-		ArrayList<TraceLogItem> traceLog = traceLogAspect.getTraceLog();
-		for(TraceLogItem traceLogItem: traceLog) {
-			System.out.println(traceLogItem.getMethod());
-			for(String arg: traceLogItem.getArgs()) {
-				System.out.println(arg);
-			}
+	public ResponseEntity<Result> calculateExpressionResult(@RequestBody String expression) {
+		double result = 0;
+		try {
+			this.expression.setExpression(expression);
+			this.expression.extractFromExpression();
+			result = this.expression.calculate();
+		} catch(Exception e) {
+			return ResponseEntity.badRequest().body(new Result(e.getMessage()));
 		}
-
-		return ResponseEntity.ok(new Result(result, traceLog));
+		return ResponseEntity.ok(new Result(result));
 	}
 }

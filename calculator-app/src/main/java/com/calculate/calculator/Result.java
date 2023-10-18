@@ -1,35 +1,33 @@
 package com.calculate.calculator;
 
-import java.util.ArrayList;
-
-import com.calculate.calculator.traceLog.TraceLogItem;
-
 public class Result {
     private final double result;
-    private final TraceLogItem[] traceLog;
+    private final String message;
     public Result() {
         this.result = 0;
-        this.traceLog = new TraceLogItem[0];
+        this.message = "";
     }
 
     public Result(double result) {
         this.result = result;
-        this.traceLog = new TraceLogItem[0];
+        this.message = "";
     }
 
-    public Result(double result, ArrayList<TraceLogItem> traceLog) {
+    public Result(String message) {
+        this.result = 0;
+        this.message = message;
+    }
+
+    public Result(double result, String message) {
         this.result = result;
-        this.traceLog = new TraceLogItem[traceLog.size()];
-        for(int i = 0; i < traceLog.size(); i++) {
-            this.traceLog[i] = traceLog.get(i);
-        }
+        this.message = message;
     }
 
     public double getResult() {
         return result;
     }
 
-    public TraceLogItem[] getTraceLog() {
-        return traceLog;
+    public String getMessage() {
+        return message;
     }
 }
