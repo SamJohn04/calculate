@@ -14,13 +14,6 @@ public class Log {
         this.expression = null;
     }
 
-    public Log(String username, String expression, double result) {
-        this.result = result;
-        this.username = username;
-        this.expression = new Expression(expression);
-        this.expression.extractFromExpression();
-    }
-
     public Log(String username, Expression expression, double result) {
         this.result = result;
         this.username = username;
