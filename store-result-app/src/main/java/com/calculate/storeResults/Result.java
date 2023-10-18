@@ -1,30 +1,31 @@
-package com.calculate.calculator;
+package com.calculate.storeResults;
 
 import java.util.ArrayList;
 
 public class Result {
-    private final double result;
+    private final String message;
     private final TraceLogItem[] traceLog;
+
     public Result() {
-        this.result = 0;
+        this.message = "";
         this.traceLog = new TraceLogItem[0];
     }
 
-    public Result(double result) {
-        this.result = result;
+    public Result(String message) {
+        this.message = message;
         this.traceLog = new TraceLogItem[0];
     }
 
-    public Result(double result, ArrayList<TraceLogItem> traceLog) {
-        this.result = result;
+    public Result(String message, ArrayList<TraceLogItem> traceLog) {
+        this.message = message;
         this.traceLog = new TraceLogItem[traceLog.size()];
         for(int i = 0; i < traceLog.size(); i++) {
             this.traceLog[i] = traceLog.get(i);
         }
     }
 
-    public double getResult() {
-        return result;
+    public String getMessage() {
+        return message;
     }
 
     public TraceLogItem[] getTraceLog() {

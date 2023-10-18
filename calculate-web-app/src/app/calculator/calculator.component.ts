@@ -21,11 +21,12 @@ export class CalculatorComponent {
       }
     })
 
-    const { result } = await res.json();
+    const { result, traceLog } = await res.json();
+    console.log("calculator trace: ", traceLog);
     this.result = result;
     this.loading = false;
 
-    await fetch('http://localhost:8090/log', {
+    const storeResult = await fetch('http://localhost:8090/log', {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -37,5 +38,7 @@ export class CalculatorComponent {
         'Content-Type': 'application/json',
       }
     })
+
+    console.log("Store result trace: ", (await storeResult.json()).traceLog);
   }
 }

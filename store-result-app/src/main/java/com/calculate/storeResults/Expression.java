@@ -2,6 +2,9 @@ package com.calculate.storeResults;
 
 import java.util.StringTokenizer;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Expression {
     String expression;
     double firstOperand, secondOperand;
@@ -21,35 +24,37 @@ public class Expression {
         this.operator = ' ';
     }
 
+    @TraceLog
     public String getExpression() {
         return this.expression;
     }
 
+    @TraceLog
     public double getFirstOperand() {
         return this.firstOperand;
     }
 
+    @TraceLog
     public double getSecondOperand() {
         return this.secondOperand;
     }
 
+    @TraceLog
+    public char getOperator() {
+        return this.operator;
+    }
+
+    @TraceLog
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
+
+    @TraceLog
     public void extractFromExpression() {
         StringTokenizer tokenizer = new StringTokenizer(this.expression, "+-*/%^", true);
 
         this.firstOperand = Double.parseDouble(tokenizer.nextToken());
         this.operator = tokenizer.nextToken().charAt(0);
         this.secondOperand = Double.parseDouble(tokenizer.nextToken());
-    }
-
-    public double calculate() {
-        switch(this.operator) {
-            case '+': return this.firstOperand + this.secondOperand;
-            case '-': return this.firstOperand - this.secondOperand;
-            case '*': return this.firstOperand * this.secondOperand;
-            case '/': return this.firstOperand / this.secondOperand;
-            case '%': return this.firstOperand % this.secondOperand;
-            case '^': return Math.pow(this.firstOperand, this.secondOperand);
-            default: return -1;
-        }
     }
 }
