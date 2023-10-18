@@ -1,4 +1,4 @@
-package com.calculate.storeResults;
+package com.calculate.storeResults.traceLog;
 
 import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;

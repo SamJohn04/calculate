@@ -2,6 +2,8 @@ package com.calculate.storeResults;
 
 import java.util.ArrayList;
 
+import com.calculate.storeResults.traceLog.TraceLogItem;
+
 public class Result {
     private final String message;
     private final TraceLogItem[] traceLog;
