@@ -2,6 +2,8 @@ package com.calculate.calculator;
 
 import java.util.ArrayList;
 
+import com.calculate.calculator.traceLog.TraceLogItem;
+
 public class Result {
     private final double result;
     private final TraceLogItem[] traceLog;

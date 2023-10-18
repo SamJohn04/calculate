@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.calculate.calculator.traceLog.TraceLog;
+import com.calculate.calculator.traceLog.TraceLogAspect;
+import com.calculate.calculator.traceLog.TraceLogItem;
+
 @RestController
 public class CalculatorController {
 	private final TraceLogAspect traceLogAspect;

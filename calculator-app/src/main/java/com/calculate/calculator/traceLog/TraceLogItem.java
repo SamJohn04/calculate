@@ -1,4 +1,4 @@
-package com.calculate.calculator;
+package com.calculate.calculator.traceLog;
 
 public class TraceLogItem {
     private final String method;

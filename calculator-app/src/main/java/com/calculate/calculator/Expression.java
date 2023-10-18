@@ -4,6 +4,8 @@ import java.util.StringTokenizer;
 
 import org.springframework.stereotype.Service;
 
+import com.calculate.calculator.traceLog.TraceLog;
+
 @Service
 public class Expression {
     String expression;
