@@ -1,7 +1,10 @@
-package com.calculate.userauth;
+package com.calculate.userauth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.calculate.userauth.model.User;
+import com.calculate.userauth.repository.UserRepository;
 
 @Service
 public class AuthService {

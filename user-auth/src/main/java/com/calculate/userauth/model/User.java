@@ -1,4 +1,4 @@
-package com.calculate.userauth;
+package com.calculate.userauth.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
